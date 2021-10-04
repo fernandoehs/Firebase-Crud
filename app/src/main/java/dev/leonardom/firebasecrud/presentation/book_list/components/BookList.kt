@@ -29,7 +29,8 @@ fun BookList(
     state:BookListState,
     isRefreshing: Boolean,
     refreshData: () -> Unit,
-    onItemClick: (String)->Unit
+    onItemClick: (String)->Unit,
+    deleteBook: (String)->Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -42,7 +43,10 @@ fun BookList(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(
-                    items = state.books
+                    items = state.books,
+                    key = { book ->
+                        book.id
+                    }
                 ){ book ->
 
                     var isDeleted by remember { mutableStateOf(false) }
@@ -98,6 +102,7 @@ fun BookList(
                     ) {
                         if(isDeleted) {
                             // TODO("DELETE BOOK")
+                            deleteBook(book.id)
                         } else {
                             BookListItem(
                                 book,

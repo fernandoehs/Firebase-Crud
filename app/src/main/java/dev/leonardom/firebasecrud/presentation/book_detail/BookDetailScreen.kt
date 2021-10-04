@@ -73,7 +73,8 @@ fun BookDetailScreen(
                    .fillMaxWidth()
                    .align(Alignment.BottomCenter),
                onClick = {
-                   updateBook(title,author)
+                updateBook(title,author)
+
                },
                colors = ButtonDefaults.buttonColors(
                    backgroundColor = Red100

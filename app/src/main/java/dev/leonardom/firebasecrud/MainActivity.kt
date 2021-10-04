@@ -67,7 +67,8 @@ fun NavGraphBuilder.addBookList(
             onItemClick = { bookId ->
                 navController.navigate(
                     Destination.BookDetail.route + "?bookId=$bookId")
-            }
+            },
+            deleteBook = viewModel::deleteBook
         )
     }
 }

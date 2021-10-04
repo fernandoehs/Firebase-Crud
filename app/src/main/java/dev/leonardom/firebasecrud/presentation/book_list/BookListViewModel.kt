@@ -47,4 +47,8 @@ constructor(
             }
         }.launchIn(viewModelScope)
     }
+
+    fun deleteBook(bookId:String){
+        bookRepository.deleteBook(bookId)
+    }
 }

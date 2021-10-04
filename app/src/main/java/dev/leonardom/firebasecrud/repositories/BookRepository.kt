@@ -14,11 +14,11 @@ import javax.inject.Singleton
 class BookRepository
 @Inject
 constructor(
-    private val booklist: CollectionReference
+    private val bookList: CollectionReference
 ){
     fun addNewBook(book: Book){
         try {
-            booklist.document(book.id).set(book)
+            bookList.document(book.id).set(book)
         }catch (e:Exception){
             e.printStackTrace()
         }
@@ -28,7 +28,7 @@ constructor(
      try {
          emit(Result.Loading<List<Book>>())
 
-         val bookList = booklist.get().await().map{
+         val bookList = bookList.get().await().map{
              document -> document.toObject(Book::class.java)
          }
 
@@ -42,7 +42,7 @@ constructor(
         try {
             emit(Result.Loading<Book>())
 
-            val book = booklist.whereGreaterThanOrEqualTo("id",bookId)
+            val book = bookList.whereGreaterThanOrEqualTo("id",bookId)
                 .get().await()
                 .toObjects(Book::class.java)
                 .first()
@@ -60,10 +60,18 @@ constructor(
                "author" to book.author
            )
 
-           booklist.document(bookId).update(map)
+           bookList.document(bookId).update(map)
        }catch (e:Exception){
            e.printStackTrace()
        }
+    }
+
+    fun deleteBook(bookId: String){
+        try {
+            bookList.document(bookId).delete()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
 
