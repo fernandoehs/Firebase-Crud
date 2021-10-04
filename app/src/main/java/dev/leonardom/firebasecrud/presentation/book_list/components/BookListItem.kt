@@ -26,6 +26,7 @@ import dev.leonardom.firebasecrud.ui.theme.Yellow600
 @Composable
 fun BookListItem(
     book: Book,
+    onItemClick:(String)->Unit // no retorna ningun elemento por lo tanto es Unit
 ) {
     Card(
         elevation = 0.dp
@@ -35,7 +36,7 @@ fun BookListItem(
                 .fillMaxWidth()
                 .background(Color.White)
                 .clickable {
-                    TODO("ON ITEM CLICK")
+                    onItemClick(book.id)
                 }
         ){
             Image(
